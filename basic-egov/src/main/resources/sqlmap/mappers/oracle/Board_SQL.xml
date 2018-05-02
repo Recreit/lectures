@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+
+	<resultMap id="empvo" type="com.ohhoonim.vo.EmpVo">
+		<result property="empno" 	column="EMPNO" />
+		<result property="ename" 	column="ENAME" />
+		<result property="sal" 		column="SAL" />
+		<result property="manager" 	column="MANAGER" />
+		<result property="deptno" 	column="DEPTNO" />
+		<result property="hiredate" column="HIREDATE" />
+		<result property="age" 		column="AGE" />
+		<result property="comm" 	column="COMM" />
+	</resultMap>
+
+	<sql id="empQuery">
+		select EMPNO, ENAME, SAL, MANAGER, 
+				DEPTNO, HIREDATE, AGE, COMM 
+		  from EMP
+	</sql>
+
+	<select id="boardList" resultMap="empvo">
+		SELECT *
+		FROM (
+			SELECT ROWNUM AS RN, A.*
+				FROM ( 
+		 <include refid="empQuery"/>
+		 <where>
+		 	<choose>
+		 		<when test="searchType == 'empno'">
+		 			EMPNO = #{searchWord} 
+		 		</when> 
+		 		<when test="searchType == 'ename'">
+		 			ENAME like '%' || #{searchWord} || '%'
+		 		</when>
+		 	</choose>		 
+		 </where>
+		 order by empno desc
+		 ) A
+		)
+		<where>
+			<if test="pageSize != null and pageSize != '' and pageNo != null and pageNo != ''">		
+			 ROWNUM <![CDATA[ <= ]]> #{pageSize, jdbcType=INTEGER}
+				AND RN <![CDATA[ > ]]> (#{pageNo, jdbcType=INTEGER}-1)*#{pageSize, jdbcType=INTEGER}
+			</if>	
+		</where>
+	</select>
+	<select id="boardListCount2" resultType="int">
+		 select count(0) cnt from (
+		 <include refid="empQuery"/>
+		 <where>
+		 	<choose>
+		 		<when test="searchType == 'empno'">
+		 			EMPNO = #{searchWord} 
+		 		</when> 
+		 		<when test="searchType == 'ename'">
+		 			ENAME like '%' || #{searchWord} || '%'
+		 		</when>
+		 	</choose>		 
+		 </where>
+		 )
+	</select>	
+	
+	<select id="boardDetail" resultMap="empvo">
+		<include refid="empQuery"/>
+		  where
+		  	EMPNO = #{empno}
+	</select>
+	
+	<delete id="boardRemove">
+		delete emp
+		where EMPNO = #{empno}
+	</delete>
+	
+	<insert id="boardAdd">
+		INSERT INTO EMP (
+			EMPNO , ENAME , SAL , MANAGER , DEPTNO 
+			, HIREDATE , AGE , COMM )
+		VALUES (
+			#{empno} ,#{ename} ,#{sal} ,#{manager} ,#{deptno} 
+			,#{hiredate} ,#{age} ,#{comm})
+	</insert>
+	
+	<resultMap id="deptvo" type="com.ohhoonim.vo.DeptVo">
+		<result property="deptno" 	column="DEPTNO" />
+		<result property="dname" 	column="DNAME" />
+		<result property="loc" 	    column="LOC" />
+	</resultMap>
+	
+	<select id="deptList" resultMap="deptvo">
+		select DEPTNO, DNAME, LOC 
+		from dept
+	</select>
+	
+	<update id="boardModify">
+		update emp
+		<set>
+			<if test="ename != null">  ENAME 		= #{ename}</if>
+			<if test="sal != null">    , SAL 		= #{sal}</if>
+			<if test="manager != null">, MANAGER 	= #{manager}</if>
+			<if test="deptno != null"> , DEPTNO 	= #{deptno}</if>
+			<if test="hiredate != null">, HIREDATE 	= #{hiredate}</if>
+			<if test="age != null">     , AGE 		= #{age}</if>
+			<if test="comm != null">    , COMM		= #{comm}</if>
+		</set>
+		where
+			empno = #{empno}
+	
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+

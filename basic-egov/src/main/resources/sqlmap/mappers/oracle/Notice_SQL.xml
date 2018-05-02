@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Notice">
+
+	<resultMap id="noticeMap" type="com.ohhoonim.vo.NoticeVo">
+		<result property="notice_date"    column="NOTICE_DATE"     />
+		<result property="notice_iden"    column="NOTICE_IDEN"     />
+		<result property="notice_state"    column="NOTICE_STATE"     />
+		<result property="employ_type"    column="EMPLOY_TYPE"     />
+		<result property="cate_state"    column="CATE_STATE"     />
+		<result property="person"    column="PERSON"     />
+		<result property="quali_field"    column="QUALI_FIELD"     />
+		<result property="language_code"    column="LANGUAGE_CODE"     />
+		<result property="region_code"    column="REGION_CODE"     />
+		<result property="contents"    column="CONTENTS"     />
+		<result property="manager"    column="MANAGER"     />
+		<result property="apply_date"    column="APPLY_DATE"     />
+		<result property="magam_date"    column="MAGAM_DATE"     />
+		<result property="career_cnt"    column="CAREER_CNT"     />
+		<result property="reference"    column="REFERENCE"     />
+	</resultMap>
+	
+	<sql id="noticeQuery">
+		SELECT NOTICE_DATE
+		    ,NOTICE_IDEN
+		    ,NOTICE_STATE
+		    ,EMPLOY_TYPE
+		    ,CATE_STATE
+		    ,PERSON
+		    ,QUALI_FIELD
+		    ,LANGUAGE_CODE
+		    ,REGION_CODE
+		    ,CONTENTS
+		    ,MANAGER
+		    ,APPLY_DATE
+		    ,MAGAM_DATE
+		    ,CAREER_CNT
+		    ,REFERENCE
+		FROM TB_NOTICE
+	</sql>
+
+	<select id="noticeList" resultMap="noticeMap">
+		<include refid="noticeQuery"/>
+		WHERE NOTICE_DATE = #{notice_date}
+		ORDER BY NOTICE_IDEN
+	</select>
+	
+	<insert id="addNotice">
+		insert into tb_notice
+		(NOTICE_DATE
+		 ,NOTICE_IDEN
+		 ,NOTICE_STATE
+		 ,EMPLOY_TYPE
+		 ,CATE_STATE
+		    <if test="person != null">,PERSON       </if>
+		    <if test="quali_field != null">,QUALI_FIELD  </if>
+		    <if test="language_code != null">,LANGUAGE_CODE</if>
+		    <if test="region_code != null">,REGION_CODEs </if>
+		 ,CONTENTS
+		    <if test="manager != null">,MANAGER      </if>
+		    <if test="apply_date != null">,APPLY_DATE   </if>
+		    <if test="magam_date != null">,MAGAM_DATE   </if>
+		    <if test="career_cnt != null">,CAREER_CNT   </if>
+		    <if test="reference != null">,REFERENCE    </if>
+		)                             
+		values
+		(#{notice_date}
+		,#{notice_iden}
+		,#{notice_state}
+		,#{employ_type}
+		,#{cate_state}
+		<if test="person != null">,#{person}       </if>
+		<if test="quali_field != null">,#{quali_field}  </if>
+		<if test="language_code != null">,#{language_code}</if>
+		<if test="region_code != null">,#{region_code}  </if>
+		,#{contents}
+		<if test="manager != null">,#{manager}      </if>
+		<if test="apply_date != null">,#{apply_date}   </if>
+		<if test="magam_date != null">,#{magam_date}   </if>
+		<if test="career_cnt != null">,#{career_cnt}   </if>
+		<if test="reference != null">,#{reference}    </if>
+		)
+	</insert>
+	
+	<delete id="removeNotice">
+		DELETE TB_NOTICE
+		WHERE NOTICE_DATE = #{notice_date}
+	</delete>
+
+</mapper>

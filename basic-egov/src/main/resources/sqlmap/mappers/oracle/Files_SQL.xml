@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Files">
+	<resultMap id="files" type="com.ohhoonim.vo.FilesVo">
+		<result property="filesId" column="FILES_ID" />
+		<result property="filesNm" column="FILES_NM" />
+		<result property="filesUfn" column="FILES_UFN" />
+		<result property="filesSize" column="FILES_SIZE" />
+		<result property="filesType" column="FILES_TYPE" />
+		<result property="filesDl" column="FILES_DL" />
+	</resultMap>
+	
+	<select id="selectFiles" parameterType="filesVo" resultMap="files">
+		SELECT  FILES_ID, FILES_NM, FILES_UFN, FILES_SIZE, FILES_TYPE, FILES_DL
+		FROM FILES
+		WHERE FILES_ID = #{filesId}
+	</select>
+	
+	<select id="getNextId" resultType="String">
+		select FILES_SEQ.NEXTVAL from dual
+	</select>
+	
+	<insert id="addFiles" parameterType="filesVo">
+	    INSERT INTO FILES ( FILES_ID, FILES_NM, FILES_UFN, FILES_SIZE, FILES_TYPE, FILES_DL)
+	   	VALUES(#{filesId}, #{filesNm}, #{filesUfn}, #{filesSize}, #{filesType}, #{filesDl})
+	</insert>
+
+	<update id="updateFiles">
+	    UPDATE FILES
+	    SET
+		FILES_NM = #{filesNm, jdbcType=VARCHAR}
+	    , FILES_UFN = #{filesUfn, jdbcType=VARCHAR}
+	    , FILES_SIZE = #{filesSize, jdbcType=INTEGER}
+	    , FILES_TYPE = #{filesType, jdbcType=VARCHAR}
+	    , FILES_DL = #{filesDl, jdbcType=VARCHAR}
+	    WHERE FILES_ID = #{filesNm, jdbcType=INTEGER}
+	</update>
+
+	<delete id="deleteFiles">
+	    DELETE FILES WHERE FILES_ID = #{filesNm, jdbcType=INTEGER}
+	</delete>
+	
+</mapper>

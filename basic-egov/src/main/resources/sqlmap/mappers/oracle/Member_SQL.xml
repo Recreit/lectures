@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+	
+	<resultMap id="memberMap" type="com.ohhoonim.vo.MemberVo">
+		<result property="mbr_id" column="MBR_ID"/>
+		<result property="mbr_code" column="MBR_CODE"/>
+		<result property="pwd" column="PWD"/>
+		<result property="contact" column="CONTACT"/>
+		<result property="sav_pnt" column="SAV_PNT"/>
+		<result property="buy_pnt" column="BUY_PNT"/>
+		<result property="chn_id" column="CHN_ID"/>
+	</resultMap>
+	
+	<select id="isMember" resultType="int">
+		SELECT COUNT(0) 
+		FROM TB_MEMBER
+		WHERE 
+			MBR_ID = #{mbr_id}
+			AND PWD = #{pwd}
+	</select>
+	<select id="findMemberById" resultMap="memberMap">
+		SELECT MBR_ID, MBR_CODE, PWD, CONTACT, SAV_PNT, BUY_PNT, CHN_ID
+		FROM TB_MEMBER WHERE MBR_ID = #{mbr_id}
+	</select>
+	
+	<insert id="addMember">
+		INSERT INTO TB_MEMBER (
+				MBR_ID
+				, MBR_CODE
+				, PWD
+				, CONTACT
+				, SAV_PNT
+				, BUY_PNT
+				, CHN_ID)
+		VALUES (
+				#{mbr_id}
+			  , #{mbr_code}
+			  , #{pwd}
+			  , #{contact}
+			  , #{sav_pnt}
+			  , #{buy_pnt}
+			  , #{chn_id})
+	</insert>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+

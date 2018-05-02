@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Recruit">
+
+	<resultMap id="noticeMap" type="com.ohhoonim.vo.NoticeVo">
+		<result property="notice_date"    column="NOTICE_DATE"     />
+		<result property="notice_iden"    column="NOTICE_IDEN"     />
+		<result property="notice_state"    column="NOTICE_STATE"     />
+		<result property="employ_type"    column="EMPLOY_TYPE"     />
+		<result property="cate_state"    column="CATE_STATE"     />
+		<result property="person"    column="PERSON"     />
+		<result property="quali_field"    column="QUALI_FIELD"     />
+		<result property="language_code"    column="LANGUAGE_CODE"     />
+		<result property="region_code"    column="REGION_CODE"     />
+		<result property="contents"    column="CONTENTS"     />
+		<result property="manager"    column="MANAGER"     />
+		<result property="apply_date"    column="APPLY_DATE"     />
+		<result property="magam_date"    column="MAGAM_DATE"     />
+		<result property="career_cnt"    column="CAREER_CNT"     />
+		<result property="reference"    column="REFERENCE"     />
+	</resultMap>
+	
+	<select id="recruitList" resultMap="noticeMap">
+	SELECT R.NOTC_REGT_DT NOTICE_DATE
+    	,R.EMPL_NOTC_ID NOTICE_IDEN
+    	,R.EMPL_NOTC_CONT NOTICE_STATE
+    	,R.EMPL_CATE_CODE EMPLOY_TYPE
+   		,DECODE(R.EMPL_CATE_CODE, 
+                    'A1','기획',   
+                    'A2','서무',
+                    'B1','전산',
+                    'B2','프로그래머',
+                    'C1','회계',
+                    'D1','건설',
+                    'E1','제조'
+            ) CATE_STATE
+    	,R.EMPL_EXPT_PERS PERSON
+    	,DECODE(R.LICN_CODE,
+    			'1001','1',
+    			'1002','1',
+    			'1003','1',
+    			'1004','1',
+    			'2003','2',
+    			'2001','8',
+    			'2002','8',
+    			'3001','10',
+    			'3002','301',
+    			'3003','379'
+    		 ) QUALI_FIELD
+    	,DECODE(R.LANG_CODE,
+    			'100','1',
+    			'110','4',
+    			'130','6',
+    			'1115','7',
+    			'125','9',
+    			'120','10',
+    			'105','11'
+    			) LANGUAGE_CODE
+    	,R.NOTC_CONT CONTENTS
+    	,U.USER_NM MANAGER
+    	,TO_CHAR(TO_DATE(R.RECV_STRT_DT, 'YYYY-MM-DD'), 'YYYY-MM-DD') APPLY_DATE
+    	,TO_CHAR(TO_DATE(R.RECV_END_DT, 'YYYY-MM-DD'), 'YYYY-MM-DD') MAGAM_DATE
+	FROM TB_RECRUIT R, TB_USER U
+	WHERE 
+    	R.MNGE_ID = U.USER_ID(+)
+    	AND R.NOTC_REGT_DT = #{notice_date}
+	</select>
+
+</mapper>
