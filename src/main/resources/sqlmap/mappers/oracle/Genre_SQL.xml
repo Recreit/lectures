@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Genre">
+
+	<resultMap id="GenreMapVo" type="ssk.vo.GenreVo">
+		<result property="game_id"    column="GAME_ID"     />
+		<result property="genre"    column="GENRE"     />
+		<result property="genre_name"    column="GENRE_NAME"     />
+	</resultMap>
+	<resultMap id="GenreMapDetail" type="java.util.Map">
+		<result property="game_id"    column="GAME_ID"  javaType="string"  />
+		<result property="genre"    column="GENRE"  javaType="string"   />
+		<result property="genrename"    column="GENRENAME"  javaType="string"  />
+	</resultMap>
+	
+	<select id="genreList"  resultMap="GenreMapVo">
+		SELECT G.GAME_ID GAME_ID, G.GENRE GENRE, C.CODE_VALUE_NAME GENRE_NAME
+		FROM PJ_GENRE G, PJ_CODES C
+		WHERE G.GENRE = C.CODE_VALUE
+	</select>
+	
+</mapper>

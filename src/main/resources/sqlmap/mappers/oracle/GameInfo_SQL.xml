@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GameInfo">
+
+	<resultMap id="GameInfoMap" type="ssk.vo.GameVo">
+		<result property="game_id"    column="GAME_ID"     />
+		<result property="title_ko"    column="TITLE_KO"     />
+		<result property="title_en"    column="TITLE_EN"     />
+		<result property="designer"    column="DESIGNER"     />
+		<result property="make_year"    column="MAKE_YEAR"     />
+		<result property="play_min"    column="PLAY_MIN"     />
+		<result property="play_max"    column="PLAY_MAX"     />
+	</resultMap>
+	<resultMap id="gameDetailMap" type="java.util.Map">
+		<result property="game_id"    column="GAME_ID"   javaType="string"  />
+		<result property="title_ko"    column="TITLE_KO"  javaType="string"   />
+		<result property="title_en"    column="TITLE_EN"  javaType="string"   />
+		<result property="designer"    column="DESIGNER"  javaType="string"   />
+		<result property="make_year"    column="MAKE_YEAR"  javaType="string"   />
+		<result property="play_min"    column="PLAY_MIN" javaType="string"    />
+		<result property="play_max"    column="PLAY_MAX" javaType="string"    />
+	</resultMap>
+	<sql id="gameInfoQuery">
+		select
+			game_id, title_ko, title_en, designer, make_year, play_min, play_max
+		from pj_gameinfo
+	</sql>
+
+	<select id="gameList" resultMap="GameInfoMap">
+		<include refid="gameInfoQuery"/>
+	</select>
+	
+	<insert id="gameAdd">
+		insert into pj_gameinfo (game_id, title_ko, title_en, designer, make_year, play_min, play_max)
+		values (
+		#{game_id}
+		,#{title_ko}
+		,#{title_en}
+		,#{designer}
+		,#{make_year}
+		,#{play_min}
+		,#{play_max}
+		)
+	</insert>
+	
+	<select id="gameDetail" resultMap="gameDetailMap">
+		<include refid="gameInfoQuery"/>
+		where game_id = #{game_id}
+	</select>
+	
+</mapper>

@@ -1,0 +1,370 @@
+/*레이아웃에 쓰는 포지션 3가지.
+            relative : offset 값을 재설정하게 됨.
+            absolute : relative 에 의한 offset 으로부터의 위치.
+            fixed : 브라우저의 절대위치.
+        */
+        body, div, span ,a, ul, label, input, select, button {
+            margin: 0px;
+            padding: 0px; 
+        }
+        #topmenu1{
+            min-width: 1000px;
+            float: left;
+            width: 100%;
+        }
+        #menu0 {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            min-width: 1200px;
+            padding-bottom: 10px;
+            display: inline;
+            text-align: center;
+        }
+        #menu0 td{
+            float: left;
+            padding: 12px;
+        }
+        #mainimage a{
+            display: block;
+            color: green;
+            text-decoration: none;
+            text-align: left;
+            padding-right: 10px;
+        }
+        #mainimage a h1{
+            float: left;
+            margin: 0px;
+            padding: 0px; 
+        }
+        #searchinput{
+            width : 400px;
+            height: 22px;
+            margin-top: 12px;
+        }
+        #searchbtn{
+            width : 48px;
+            height: 24px;
+        }
+        #detailsearchbtn{
+            width: 80px;
+            height: 24px;
+        }
+        #menubar{
+            min-width: 800px;
+            float: left;
+            background-color: #333333;
+            width: 100%;
+        }
+        #wrapper {
+            background-color: bisque;
+        }   
+        #submenu {
+            background-color: greenyellow;
+        }
+        #contents {
+            background-color: rgb(49, 106, 167);
+        }
+        #footer {
+            background-color: orange;
+            position: fixed; bottom: 0px;
+        }
+        #topmenu2{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display : inline;
+        }
+        #topmenu2 li{
+            float: left;
+            background-color: #333333;
+            padding-left: 15px;
+        }
+        #loginmenu{
+            float: right;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;
+        }
+        #loginmenu td{
+            width: 100px;
+        }
+        #loginmenu td a{
+            text-decoration: none;
+        }
+        #loginbutton, #Signinbutton{
+            display: block;
+            background-color: #222222;
+            color: white;
+            font-size:14px;
+            text-align: center;
+            padding-top: 9px;
+            padding-bottom: 28px;
+            padding-left: 22px;
+            padding-right: 22px;
+            height: 20px;
+        }
+        #topmenu2 li a{
+            display: block;
+            color: white;
+            text-align: center;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 25px;
+            padding-right: 25px;
+            text-decoration: none;
+        }
+        #topmenu2 li a:hover{
+            background-color: black;
+        }
+        #contents{
+            padding-top: 10px;
+            min-width: 1200px;
+            position: relative;
+        }
+        /*이하 회원가입*/
+        /**/
+        .header h2 {
+            color: black;
+            margin : 5px;
+        }
+        .title{
+            width: 120px;
+            display: block;
+            float : left;
+            font-weight: bold;
+        }
+        #signup input:read-only{
+            background-color: gainsboro;
+        }
+        #signup .warning{
+            color: crimson;
+            margin-left: 120px;
+            font-size: 0.8em;
+        }
+        #signup .buttons{
+            text-align: center;
+            margin-top: 15px;
+        }
+        #signup {
+            min-width: 500px;
+            margin-top: 15px;
+        }
+        #frm div{
+            margin: 5px;
+        }
+        /*이하 로그인 페이지*/
+        #signin {
+            min-width: 500px;
+            margin-top: 15px;
+        }
+        .title{
+            width: 120px;
+            display: block;
+            float : left;
+            font-weight: bold;
+        }
+        #findLink a{
+            color:black;
+            text-decoration: none;
+        }
+        #Loginbtnbig, #Sendbtnbig {
+            width : 400px;
+            margin: 8px;
+        }
+        /* 이하 게임별 페이지 */
+        #submenu {
+            background-color: greenyellow;
+            width : 140px;
+            margin-top: 10px;
+            float: left;
+        }
+        #submenu li{
+            padding: 0px;
+            border: 1px solid black;
+        }
+        #submenu li a{
+            padding: 6px;
+            display: block;
+            color:black;
+            text-decoration: none;
+        }
+        #submenu li a:hover{
+            background-color: rgb(192, 247, 247);
+        }
+
+        #gameinfo_table {
+            margin-top: 10px;
+            position: absolute; left: 180px;
+            float: left;
+            width: 1200px;
+        }
+        #gameinfo_table ul{
+            list-style-type: none;
+        }
+        #gameinfo_table ul li{
+            height: 30px;
+            border: 1px solid black;
+        }
+        #gameinfo_table ul li:nth-child(even){
+            background-color: aquamarine;
+        }
+        #gameinfo_table ul li:nth-child(odd){
+            background-color: burlywood;
+        }
+        .gameinfo{
+            width: 120px;
+            display: block;
+            float: left;
+        }
+        /*이하 게시판 관련 일반설정*/
+        #recentReview{
+            width: 800px;
+        }
+        .recentNotice{
+            width: 1000px;
+            display: inline-block;
+        }
+        .list_table {
+            width: 1000px; 
+            border-collapse:collapse;
+            min-width: 1000px;
+        }
+        .list_table thead th { 
+            padding: 5px 0; 
+            text-align: center; 
+            background: #ee8aee; 
+        }
+        .list_table tbody td {
+            padding: 3px 0; 
+            text-align: center;
+        }
+        .list_table tbody tr:nth-child(even){
+            background-color: gray;
+        }
+        .list_table tbody tr:nth-child(odd){
+            background-color: #e5e5e5;
+        }
+        #WriteBtn {
+            background-color: white;
+            text-align: right;
+        }
+        .NoticePageSelect{
+            text-align: center;
+        }
+        .NoticePageSelect td{
+            background-color: white;
+        }
+        .NoticePageSelect a{
+            text-decoration: none;
+            background-color: whitesmoke;
+            color: black;
+            padding: 5px;
+            margin: 0px;
+            border: solid black 1px;
+        }
+        #moreBtn{
+            float: right;
+            text-decoration: none;
+            color : black;
+        }
+        /*이하 리뷰 페이지 관련 태그*/
+        .ReviewImages  td{
+            padding: 12px;
+            width: 120px;
+            height: 180px;
+        }
+        .ReviewImages a{
+            text-decoration: none;
+            color : black;
+            font-size : 14px;
+        }
+        .ReviewImages img{
+            width: 120px;
+            height: 120px;
+        }
+        /*게시글 내부 설정*/
+        #PostsTitle{
+            background-color: bisque;
+            font-size: 35px;
+            min-width: 1400px;
+        }
+        #contents_innertext{
+            background-color: bisque;
+        }
+        #PostInfo {
+            background-color: blanchedalmond;
+            min-width: 1400px;
+        }
+        #PostInfo div{
+            display: inline-block;
+            width: 400px;
+            text-align: center;
+        }
+        .infogameTab {
+            min-width: 1500px;
+        }
+        .infoGameImage, .infoGameScore{
+            display: inline-block;
+        }
+        .infoGameScore div{
+            padding :10px;
+        }
+        #contents_innertext {
+            min-width: 1500px;
+        }
+        #GrayTitle{
+            color : gray;
+            text-align: left;
+        }
+        /*게시판 우측 서브메뉴*/
+        #rightSubMenu {
+            background-color: greenyellow;
+            width : 140px;
+            margin-top: 10px;
+            position: absolute;
+            top:40px;left:1030px;
+        }
+        #rightSubMenu ul{
+            list-style-type: none;
+        }
+        #rightSubMenu li{
+            padding: 0px;
+            border: 1px solid black;
+        }
+        #rightSubMenu li a{
+            padding: 6px;
+            display: block;
+            color:black;
+            text-decoration: none;
+        }
+        #rightSubMenu li a:hover{
+            background-color: rgb(192, 247, 247);
+        }
+        /*랭킹 페이지 테이블 설정*/
+        .RankTable{
+            border: 1px solid #000000;
+            border-collapse:collapse;
+            background-color: rgb(45, 165, 165);
+            width : 1000px;
+            text-align: center;
+        }
+        .RankTable th, .RankTable td {
+            border: 1px solid #000000;
+        }
+        .RankTable img{
+            width : 100px;
+        }
+        .Game_title_div{
+            text-align: left;
+            padding-left: 15px;
+        }
+        .Game_title_div a{
+            text-decoration: none;
+            color : blue;
+        }
+        .Game_title_div a:hover{
+            color : silver;
+        }

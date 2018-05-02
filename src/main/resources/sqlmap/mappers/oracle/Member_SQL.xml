@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+
+	<resultMap id="MemberMap" type="ssk.vo.MemberVo">
+		<result property="mbr_id"    column="MBR_ID"     />
+		<result property="mbr_code"    column="MBR_CODE"     />
+		<result property="pwd"    column="PWD"     />
+		<result property="mbr_nick"    column="MBR_NICK"     />
+		<result property="mbr_mail"    column="MBR_MAIL"     />
+		<result property="area_code"    column="AREA_CODE"     />
+		<result property="mbr_gen"    column="MBR_GEN"     />
+	</resultMap>
+	<!-- 
+	<resultMap id="MemberDetailMap" type="java.util.Map">
+		<result property="empno"    column="EMPNO"     javaType="java.lang.String"/>
+		<result property="ename"    column="ENAME"     javaType="string"/>
+		<result property="sal"      column="SAL"       javaType="string"/>
+		<result property="manager"  column="MANAGER"   javaType="string"/>
+		<result property="managerName"  column="MANAGER_NAME"   javaType="string"/>
+		<result property="deptno"   column="DEPTNO"    javaType="string"/>
+		<result property="dname"   column="DNAME"    javaType="string"/>
+		<result property="hiredate" column="HIREDATE"  javaType="string" jdbcType="DATE"/>
+		<result property="age"      column="AGE"       javaType="string"/>
+		<result property="comm"     column="COMM" 	   javaType="string"/>
+	</resultMap>
+	 -->
+	<sql id="memberQuery">
+		select
+			mbr_id, mbr_code, pwd, mbr_nick, mbr_mail, area_code, mbr_gen
+		from pj_member
+	</sql>
+
+	<select id="memberList" resultMap="MemberMap">
+		<include refid="memberQuery"/>
+	</select>
+	
+	<insert id="memberAdd">
+		insert into pj_member (mbr_id, mbr_code, pwd, mbr_nick, mbr_mail, area_code, mbr_gen)		
+		values (
+		#{mbr_id}
+		,#{mbr_code}
+		,#{pwd}
+		,#{mbr_nick}
+		,#{mbr_mail}
+		,#{area_code}
+		,#{mbr_gen}
+		)
+	</insert>
+
+</mapper>

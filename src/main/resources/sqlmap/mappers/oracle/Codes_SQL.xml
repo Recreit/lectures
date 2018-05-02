@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Codes">
+	
+	<resultMap id="CodesMap" type="ssk.vo.CodesVo">
+		<result property="code"    column="CODE"     />
+		<result property="code_name"    column="CODE_NAME"     />
+		<result property="code_value"    column="CODE_VALUE"     />
+		<result property="code_value_name"    column="CODE_VALUE_NAME"     />
+	</resultMap>
+
+	<select id="codesList" resultMap="CodesMap">
+		select
+			code_value, code_value_name
+		from pj_codes
+	</select>
+	
+</mapper>
